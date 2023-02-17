@@ -1,24 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import Login from "./components/loginpage"
+import Homepage from "./components/homepage"
+import { UserContext } from './contexts/UserContext';
+import { useState } from 'react';
 
 function App() {
+  const[showProfile, setShowProfile]= useState(false);
+  const [username, setUsername]= useState("");
+  const [password, setPassword]=useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+      <UserContext.Provider value={{username, setUsername, password, setPassword, showProfile, setShowProfile}}>
+        {showProfile ? <Homepage/> : <Login/>}
+        </UserContext.Provider>
+      </div>
   );
 }
 
